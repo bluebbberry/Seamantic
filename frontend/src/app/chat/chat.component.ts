@@ -27,7 +27,7 @@ export class ChatComponent {
   protected changed: boolean = false;
   public selectedFeed: Feed = Feed.HOME;
   protected seLevel: number = 0;
-  protected MAXIMUM_SE_LEVEL = 10;
+  protected MAXIMUM_SE_LEVEL = 2;
 
   constructor(private http: HttpClient,
               protected microblogService: MicroblogService,

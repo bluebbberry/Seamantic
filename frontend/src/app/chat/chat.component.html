@@ -21,6 +21,9 @@
       <label>Se-Level:&nbsp;</label>
       <label>{{seLevel}}</label>
     </div>
+    <div class="text-center">
+      <label [hidden]="seLevel <= MAXIMUM_SE_LEVEL">Too high!</label>
+    </div>
   </div>
 
   <div class="feed-container flex-grow-1 d-flex flex-column">
@@ -39,5 +42,6 @@
       <textarea [(ngModel)]="newMessage" class="form-control" rows="2" placeholder="What's happening?"></textarea>
     </div>
     <button [disabled]="seLevel > MAXIMUM_SE_LEVEL" (click)="clickedOnSendToMyAccount()" class="btn btn-primary ms-3" style="float: right">Send</button>
+    <button [hidden]="seLevel <= MAXIMUM_SE_LEVEL" class="btn btn-primary ms-3" style="float: right">Lower Se-Level</button>
   </div>
 </div>
