@@ -31,6 +31,8 @@ export class ChatComponent {
   public selectedFeed: Feed = Feed.HOME;
   protected readonly Feed = Feed;
   selection: string = "query";
+  insertLabels: any;
+  insertDescriptions: any;
 
   constructor(private http: HttpClient,
               protected microblogService: MicroblogService,
@@ -59,6 +61,11 @@ export class ChatComponent {
         this.seLevelService.seLevel++;
       } else if (this.seLevelService.seLevel > 0) {
         this.seLevelService.seLevel--;
+      }
+      if (this.selection == 'insert') {
+        // TODO: implement correct format for WIKIDATA INSERT and handle it on the bot-side
+        // TODO: implement being able to select multiple types of inserting data
+        this.newMessage = "WIKIDATA INSERT " + this.insertLabels + ";" + this.insertDescriptions;
       }
       this.newMessage += ' #semanticweb';
     }
