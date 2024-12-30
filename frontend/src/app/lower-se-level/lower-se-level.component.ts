@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {HttpClient} from "@angular/common/http";
 import {StatusesService} from "../services/statuses.service";
 import {NgForOf, NgIf} from "@angular/common";
+import {SeLevelService} from "../services/se-level.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-lower-se-level',
@@ -19,7 +21,7 @@ export class LowerSeLevelComponent {
   wikidataForm: FormGroup;
   message: string | null = null;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, protected statusesService: StatusesService) {
+  constructor(private http: HttpClient, private fb: FormBuilder, protected statusesService: StatusesService, protected seLevelService: SeLevelService, private router: Router) {
     this.wikidataForm = this.fb.group({
       label: ['', Validators.required],
       description: ['', Validators.required],
@@ -29,6 +31,7 @@ export class LowerSeLevelComponent {
 
   addItemToWikidata() {
     if (this.wikidataForm.valid) {
+      this.seLevelService.seLevel--;
       const formData = this.wikidataForm.value;
       const payload = {
         labels: {
@@ -64,5 +67,9 @@ export class LowerSeLevelComponent {
       //   }
       // );
     }
+  }
+
+  clickedOnGoBack() {
+    this.router.navigate(['/']);
   }
 }

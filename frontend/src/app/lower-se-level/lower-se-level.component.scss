@@ -1,0 +1,40 @@
+/* wikidata-list.component.css */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.list-group-item {
+  font-size: 1rem;
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.alert-info {
+  background-color: #e9f7fd;
+  color: #007bff;
+}
+
+.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.w-100 {
+  width: 100%;
+}
