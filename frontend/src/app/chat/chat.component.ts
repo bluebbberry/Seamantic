@@ -11,15 +11,16 @@ import {GlobalFeedComponent} from "./global-feed/global-feed.component";
 import {DolphinService} from "../services/dolphin.service";
 import {SeLevelService} from "../services/se-level.service";
 import {StatusesService} from "../services/statuses.service";
+import {SemanticFeedComponent} from "./semantic-feed/semantic-feed.component";
 
 enum Feed {
-  HOME, LOCAL, GLOBAL
+  HOME, LOCAL, GLOBAL, SEAMANTIC
 }
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, CommonModule, NgFor, HomeFeedComponent, LocalFeedComponent, GlobalFeedComponent],
+  imports: [FormsModule, CommonModule, NgFor, HomeFeedComponent, LocalFeedComponent, GlobalFeedComponent, SemanticFeedComponent],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })
@@ -69,6 +70,9 @@ export class ChatComponent {
         break;
       case Feed.GLOBAL:
         this.selectedFeed = Feed.GLOBAL;
+        break;
+      case Feed.SEAMANTIC:
+        this.selectedFeed = Feed.SEAMANTIC;
         break;
     }
   }

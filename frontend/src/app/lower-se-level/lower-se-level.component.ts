@@ -20,6 +20,7 @@ import {Router} from "@angular/router";
 export class LowerSeLevelComponent {
   wikidataForm: FormGroup;
   message: string | null = null;
+  private wikiDataBaseUrl: string = "https://www.wikidata.org/w/rest.php/wikibase/v1";
 
   constructor(private http: HttpClient, private fb: FormBuilder, protected statusesService: StatusesService, protected seLevelService: SeLevelService, private router: Router) {
     this.wikidataForm = this.fb.group({
@@ -48,24 +49,23 @@ export class LowerSeLevelComponent {
         }
       };
 
-      // this.http.post('https://www.wikidata.org/w/api.php?action=wbeditentity&new=item&format=json', payload, {
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   params: {
-      //     origin: '*'
-      //   }
-      // }).subscribe(
-      //   () => {
-      //     this.message = 'Item successfully added to Wikidata!';
-      //     this.items.push(formData.label);
-      //     this.wikidataForm.reset();
-      //   },
-      //   (error) => {
-      //     console.error(error);
-      //     this.message = 'Failed to add item to Wikidata.';
-      //   }
-      // );
+      this.http.post(this.wikiDataBaseUrl, payload, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          origin: '*'
+        }
+      }).subscribe(
+        () => {
+          this.message = 'Item successfully added to Wikidata!';
+          this.wikidataForm.reset();
+        },
+        (error) => {
+          console.error(error);
+          this.message = 'Failed to add item to Wikidata.';
+        }
+      );
     }
   }
 
