@@ -31,14 +31,6 @@
   <!-- Fixed Post Box -->
   <div class="post-box fixed-bottom">
     <div class="mb-3">
-      <div *ngIf="sidekickService.isInQuickSelect('dolphin');">
-        <label>Dolphin-Suggestions:</label>
-        <select class="form-select sidekick-select" (change)="onSelectKnowledgeBit($event.target)">
-          <option *ngFor="let knowledgeBit of dolphinService.knowLedgeBase" [value]="knowledgeBit">
-            {{ knowledgeBit }}
-          </option>
-        </select>
-      </div>
       <textarea [(ngModel)]="newMessage" class="form-control" rows="2" placeholder="What's happening?"></textarea>
     </div>
     <button (click)="sendToMyAccount()" class="btn btn-primary ms-3" style="float: right">Send</button>
