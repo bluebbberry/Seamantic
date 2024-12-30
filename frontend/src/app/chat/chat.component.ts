@@ -63,8 +63,6 @@ export class ChatComponent {
         this.seLevelService.seLevel--;
       }
       if (this.selection == 'insert') {
-        // TODO: implement correct format for WIKIDATA INSERT and handle it on the bot-side
-        // TODO: implement being able to select multiple types of inserting data
         this.newMessage = "WIKIDATA INSERT " + this.insertLabels + ";" + this.insertDescriptions;
       }
       this.newMessage += ' #semanticweb';
