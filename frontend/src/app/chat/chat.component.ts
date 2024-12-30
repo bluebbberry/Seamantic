@@ -29,6 +29,8 @@ export class ChatComponent {
   newMessage: string = '';
   protected changed: boolean = false;
   public selectedFeed: Feed = Feed.HOME;
+  protected readonly Feed = Feed;
+  selection: string = "query";
 
   constructor(private http: HttpClient,
               protected microblogService: MicroblogService,
@@ -43,16 +45,32 @@ export class ChatComponent {
     this.microblogService.fetchHomeStatuses();
     this.microblogService.fetchLocalStatuses();
     this.microblogService.fetchGlobalStatuses();
+    this.microblogService.fetchSemanticStatuses();
     this.userService.fetchUserInfo();
   }
 
   clickedOnSendToMyAccount() {
-    this.seLevelService.seLevel++;
+    if (this.selectedFeed == Feed.SEAMANTIC) {
+      if (this.selection == 'query') {
+        if (this.seLevelService.seLevel > this.seLevelService.MAXIMUM_SE_LEVEL && this.selectedFeed == Feed.SEAMANTIC) {
+          alert("You Sea-Level is too high for another query. Try inserting knowledge into the feed to lower your sea-level!");
+          return;
+        }
+        this.seLevelService.seLevel++;
+      } else if (this.seLevelService.seLevel > 0) {
+        this.seLevelService.seLevel--;
+      }
+      this.newMessage += ' #semanticweb';
+    }
     console.log("Clicked on send");
     if (this.newMessage) {
       this.statusesService.statuses.push(this.newMessage);
       this.microblogService.sendMessage(this.newMessage, () => {
-        this.microblogService.fetchHomeStatuses();
+        if (this.selectedFeed == Feed.HOME) {
+          this.microblogService.fetchHomeStatuses();
+        } else if (this.selectedFeed == Feed.SEAMANTIC) {
+          this.microblogService.fetchSemanticStatuses();
+        }
       });
       this.newMessage = '';
     } else {
@@ -80,8 +98,6 @@ export class ChatComponent {
   clickedOnIcon() {
     this.router.navigate(['/']);
   }
-
-  protected readonly Feed = Feed;
 
   clickedOnEditSidekickSelection() {
     this.router.navigate(['/choose-sidekick']);

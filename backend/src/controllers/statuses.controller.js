@@ -54,6 +54,20 @@ router.get("/global", async (request, response) => {
     }
 });
 
+// get statuses from client
+router.get("/semantic", async (request, response) => {
+    try {
+        // Send message to mastodon server
+        const statuses = await masto.v1.timelines.tag.$select("semanticweb").list({
+            limit: 30,
+        });
+        response.status(200).json({ requestBody: statuses });
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+        response.status(500).json({ error: "Failed to fetch posts" });
+    }
+});
+
 // get descendants of status
 router.get("/:id/children", async (request, response) => {
     try {
