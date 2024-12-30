@@ -1,0 +1,23 @@
+<!-- wikidata-list.component.html -->
+<div>
+  <h1>Wikidata Items</h1>
+  <ul>
+    <li *ngFor="let status of statusesService.statuses">{{ status }}</li>
+  </ul>
+
+  <h2>Add New Item to Wikidata</h2>
+  <form [formGroup]="wikidataForm" (ngSubmit)="addItemToWikidata()">
+    <label for="label">Label:</label>
+    <input id="label" formControlName="label" required />
+
+    <label for="description">Description:</label>
+    <input id="description" formControlName="description" required />
+
+    <label for="language">Language:</label>
+    <input id="language" formControlName="language" required value="en" />
+
+    <button type="submit" [disabled]="wikidataForm.invalid">Add Item</button>
+  </form>
+
+  <div *ngIf="message" class="message">{{ message }}</div>
+</div>
