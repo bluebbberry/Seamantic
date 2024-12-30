@@ -9,6 +9,7 @@ export class MicroblogService {
   public homeStatuses?: any[];
   public localStatuses?: any[];
   public globalStatuses?: any[];
+  public semanticStatuses?: any[];
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +36,16 @@ export class MicroblogService {
       console.log(response);
       response["requestBody"].forEach((status: any) => { status.descendants = [] });
       this.homeStatuses = response["requestBody"];
+    });
+  }
+
+  fetchSemanticStatuses() {
+    this.semanticStatuses = undefined;
+    const headers = { 'content-type': 'application/json'};
+    return this.http.get<any>(`${this.url}/statuses/semantic`, { headers: headers }).subscribe((response: any) => {
+      console.log(response);
+      response["requestBody"].forEach((status: any) => { status.descendants = [] });
+      this.semanticStatuses = response["requestBody"];
     });
   }
 

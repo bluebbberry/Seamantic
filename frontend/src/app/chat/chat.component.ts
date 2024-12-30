@@ -43,6 +43,7 @@ export class ChatComponent {
     this.microblogService.fetchHomeStatuses();
     this.microblogService.fetchLocalStatuses();
     this.microblogService.fetchGlobalStatuses();
+    this.microblogService.fetchSemanticStatuses();
     this.userService.fetchUserInfo();
   }
 

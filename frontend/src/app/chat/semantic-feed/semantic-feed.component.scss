@@ -1,0 +1,63 @@
+/* General Styling */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #f5f8fa;
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Feed Styling */
+.feed-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.feed-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e1e8ed;
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.feed {
+  overflow-y: auto;
+  flex: 1;
+  padding: 15px;
+}
+
+.message-item {
+  background-color: #ffffff;
+  border: 1px solid #e1e8ed;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* Fixed Post Box Styling */
+.post-box {
+  background-color: #ffffff;
+  border-top: 1px solid #e1e8ed;
+  padding: 15px;
+}
+
+textarea.form-control {
+  border: 1px solid #e1e8ed;
+  border-radius: 4px;
+  resize: none;
+}
+
+.sidekick-select {
+  flex-grow: 1;
+  margin-right: 10px;
+}
