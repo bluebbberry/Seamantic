@@ -1,0 +1,39 @@
+/* Container Styling */
+.container {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #14171a; /* Neutral text color */
+}
+
+/* Sidekick Card */
+.sidekick-card {
+  background-color: #f5f8fa;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.sidekick-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidekick-card.selected {
+  border-color: #007bff;
+  background-color: #f0f8ff;
+}
+
+/* Sidekick Image */
+.sidekick-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Disabled Button */
+button:disabled {
+  background-color: #aab8c2;
+  border-color: #aab8c2;
+  cursor: not-allowed;
+}

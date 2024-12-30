@@ -1,0 +1,54 @@
+<div class="container-fluid vh-100 d-flex">
+  <!-- Left Sidebar -->
+  <div class="sidebar-container bg-light border-end p-3" style="width: 250px;">
+    <div class="user-info text-center mb-4">
+      <img src="sidekick_icon2.png" (click)="clickedOnIcon()" alt="sidekick-icon" class="img-fluid" style="width: 30px; height: 30px">
+      <h4 (click)="clickedOnIcon()"><i>Sidekick</i></h4>
+      <img [src]="this.userService.userInfo?.avatarStatic" alt="User Icon" class="img-fluid rounded-circle mb-2" style="width: 50px; height: 50px;">
+      <p class="mb-1 fw-bold">{{ this.userService.userInfo?.username }}</p>
+    </div>
+    <div class="nav-buttons d-flex flex-column">
+      <button class="btn btn-outline-primary mb-2" (click)="navigateTo(Feed.HOME)">Home</button>
+      <button class="btn btn-outline-secondary mb-2" (click)="navigateTo(Feed.LOCAL)">Local Feed</button>
+      <button class="btn btn-outline-secondary mb-2" (click)="navigateTo(Feed.GLOBAL)">Global Feed</button>
+    </div>
+    <br>
+    <div class="nav-buttons d-flex flex-column">
+      <button class="btn btn-outline-secondary mb-2">Settings</button>
+    </div>
+  </div>
+
+  <div class="feed-container flex-grow-1 d-flex flex-column">
+    @if (selectedFeed == Feed.HOME) {
+      <app-home-feed class="overflow-auto"></app-home-feed>
+    } @else if (selectedFeed == Feed.LOCAL) {
+      <app-local-feed class="overflow-auto"></app-local-feed>
+    } @else if (selectedFeed == Feed.GLOBAL) {
+      <app-global-feed class="overflow-auto"></app-global-feed>
+    }
+  </div>
+
+  <!-- Fixed Post Box -->
+  <div class="post-box fixed-bottom">
+    <div class="mb-3">
+      <div *ngIf="sidekickService.isInQuickSelect('dolphin');">
+        <label>Dolphin-Suggestions:</label>
+        <select class="form-select sidekick-select" (change)="onSelectKnowledgeBit($event.target)">
+          <option *ngFor="let knowledgeBit of dolphinService.knowLedgeBase" [value]="knowledgeBit">
+            {{ knowledgeBit }}
+          </option>
+        </select>
+      </div>
+      <textarea [(ngModel)]="newMessage" class="form-control" rows="2" placeholder="What's happening?"></textarea>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <button class="btn" (click)="clickedOnEditSidekickSelection()">Edit</button>
+      <select #sidekicks [(ngModel)]="selectedStartValue" class="form-select sidekick-select" (change)="onChange(sidekicks.value)">
+        <option *ngFor="let sidekick of this.sidekickService.getAllSidekicksInQuickSelectionSet()" value="{{ sidekick.name }}">
+          {{ sidekick.description }}
+        </option>
+      </select>
+      <button (click)="sendToMyAccount()" class="btn btn-primary ms-3">Send</button>
+    </div>
+  </div>
+</div>

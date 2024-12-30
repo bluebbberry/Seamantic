@@ -1,0 +1,16 @@
+<!-- Main Content -->
+<div class="feed-header">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Global</h1>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-primary" style="float: right" (click)="clickedOnReload()">Reload</button>
+    </div>
+  </div>
+</div>
+<div class="feed flex-grow-1 overflow-auto">
+  <ul class="list-group">
+    <app-status *ngFor="let status of this.microblogService.globalStatuses" [status]="status" class="list-group-item message-item"></app-status>
+  </ul>
+</div>

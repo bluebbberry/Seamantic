@@ -1,0 +1,16 @@
+<div class="container-fluid landing-page">
+  <div class="row vh-100">
+    <!-- Left Section: Image -->
+    <div class="col-md-6 d-flex justify-content-center align-items-center bg-light">
+      <img src="sidekick-image.jpg" alt="Sidekick Logo" class="img-fluid clickable-image" (click)="clickedOnStart()">
+    </div>
+
+    <!-- Right Section: Welcome Message -->
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center bg-white text-center">
+      <h1 class="welcome-text mb-4">{{ welcomeText() }}</h1>
+      <button class="btn btn-primary btn-lg" (click)="clickedOnStart()">
+        {{ confirmBtnText() }}
+      </button>
+    </div>
+  </div>
+</div>

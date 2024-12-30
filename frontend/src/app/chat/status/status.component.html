@@ -1,0 +1,5 @@
+<label [innerHTML]="this.renderHTML(status)"></label>
+<button class="btn btn-secondary" (click)="clickedOnExpandPost(status)"> {{ expandButtonText }}</button>
+<div [hidden]="!repliesExpanded">
+  Replies:&nbsp;<label *ngFor="let descendant of (descendants$ | async)" [innerHTML]="this.renderHTML(descendant)"></label>
+</div>
