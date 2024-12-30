@@ -26,6 +26,8 @@ export class ChatComponent {
   newMessage: string = '';
   protected changed: boolean = false;
   public selectedFeed: Feed = Feed.HOME;
+  protected seLevel: number = 0;
+  protected MAXIMUM_SE_LEVEL = 10;
 
   constructor(private http: HttpClient,
               protected microblogService: MicroblogService,
@@ -41,7 +43,8 @@ export class ChatComponent {
     this.userService.fetchUserInfo();
   }
 
-  sendToMyAccount() {
+  clickedOnSendToMyAccount() {
+    this.seLevel++;
     console.log("Clicked on send");
     if (this.newMessage) {
       this.microblogService.sendMessage(this.newMessage, () => {

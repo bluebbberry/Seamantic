@@ -16,6 +16,11 @@
     <div class="nav-buttons d-flex flex-column">
       <button class="btn btn-outline-secondary mb-2">Settings</button>
     </div>
+    <br>
+    <div class="text-center">
+      <label>Se-Level:&nbsp;</label>
+      <label>{{seLevel}}</label>
+    </div>
   </div>
 
   <div class="feed-container flex-grow-1 d-flex flex-column">
@@ -33,6 +38,6 @@
     <div class="mb-3">
       <textarea [(ngModel)]="newMessage" class="form-control" rows="2" placeholder="What's happening?"></textarea>
     </div>
-    <button (click)="sendToMyAccount()" class="btn btn-primary ms-3" style="float: right">Send</button>
+    <button [disabled]="seLevel > MAXIMUM_SE_LEVEL" (click)="clickedOnSendToMyAccount()" class="btn btn-primary ms-3" style="float: right">Send</button>
   </div>
 </div>
