@@ -4,7 +4,5 @@ import { ChooseSidekickComponent } from './choose-sidekick/choose-sidekick.compo
 import { ChatComponent } from './chat/chat.component';
 
 export const routes: Routes = [
-  { path: '', component: StartPageComponent },
-  { path: 'choose-sidekick', component: ChooseSidekickComponent },
-  { path: 'chat', component: ChatComponent }
+  { path: '', component: ChatComponent }
 ];
