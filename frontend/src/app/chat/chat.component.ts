@@ -9,6 +9,8 @@ import {HomeFeedComponent} from "./home-feed/home-feed.component";
 import {LocalFeedComponent} from "./local-feed/local-feed.component";
 import {GlobalFeedComponent} from "./global-feed/global-feed.component";
 import {DolphinService} from "../services/dolphin.service";
+import {SeLevelService} from "../services/se-level.service";
+import {StatusesService} from "../services/statuses.service";
 
 enum Feed {
   HOME, LOCAL, GLOBAL
@@ -32,7 +34,9 @@ export class ChatComponent {
               private router: Router,
               private changeDetectionRef: ChangeDetectorRef,
               protected userService: UserService,
-              protected dolphinService: DolphinService) {
+              protected dolphinService: DolphinService,
+              protected seLevelService: SeLevelService,
+              protected statusesService: StatusesService) {
 
     // user has already chosen sidekick, the value cannot be null
     this.microblogService.fetchHomeStatuses();
@@ -41,9 +45,11 @@ export class ChatComponent {
     this.userService.fetchUserInfo();
   }
 
-  sendToMyAccount() {
+  clickedOnSendToMyAccount() {
+    this.seLevelService.seLevel++;
     console.log("Clicked on send");
     if (this.newMessage) {
+      this.statusesService.statuses.push(this.newMessage);
       this.microblogService.sendMessage(this.newMessage, () => {
         this.microblogService.fetchHomeStatuses();
       });
@@ -79,5 +85,9 @@ export class ChatComponent {
 
   onSelectKnowledgeBit(target: any) {
     this.newMessage += target.value;
+  }
+
+  clickedOnLowerSeLevel() {
+    this.router.navigate(['lower-se-level']);
   }
 }

@@ -1,0 +1,55 @@
+<!-- wikidata-list.component.html -->
+<div class="container my-5">
+  <!-- Header Section -->
+  <div class="text-center mb-4">
+    <h1 class="display-4">Lower Se-Level</h1>
+    <label>Lower your Se-Level by sending data to Wikidata</label>
+  </div>
+
+  <!-- Se-Level Information -->
+  <div class="d-flex justify-content-between bg-light p-3 rounded mb-4">
+    <span><strong>Se-Level:</strong> {{ this.seLevelService.seLevel }}</span>
+    <span><strong>Maximum is:</strong> {{ this.seLevelService.MAXIMUM_SE_LEVEL }}</span>
+  </div>
+
+  <!-- Status List -->
+  <div class="mb-4">
+    <h2 class="h5">Current Statuses</h2>
+    <ul class="list-group">
+      <li *ngFor="let status of statusesService.statuses" class="list-group-item">{{ status }}</li>
+    </ul>
+  </div>
+
+  <!-- Add New Item Form -->
+  <div class="bg-white p-4 rounded shadow-sm">
+    <h2 class="h5 mb-3">Add New Item to Wikidata</h2>
+    <form [formGroup]="wikidataForm" (ngSubmit)="addItemToWikidata()">
+      <div class="mb-3">
+        <label for="label" class="form-label">Label:</label>
+        <input id="label" formControlName="label" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <input id="description" formControlName="description" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="language" class="form-label">Language:</label>
+        <input id="language" formControlName="language" class="form-control" required value="en" />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="wikidataForm.invalid">Add Item</button>
+    </form>
+
+    <!-- Success or Error Message -->
+    <div *ngIf="message" class="alert alert-info mt-3">
+      {{ message }}
+    </div>
+  </div>
+
+  <!-- Go Back Button -->
+  <button (click)="clickedOnGoBack()" class="btn btn-outline-secondary w-100 mt-4">
+    Go Back
+  </button>
+</div>
