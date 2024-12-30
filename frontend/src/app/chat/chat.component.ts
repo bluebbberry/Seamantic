@@ -52,6 +52,10 @@ export class ChatComponent {
   clickedOnSendToMyAccount() {
     if (this.selectedFeed == Feed.SEAMANTIC) {
       if (this.selection == 'query') {
+        if (this.seLevelService.seLevel > this.seLevelService.MAXIMUM_SE_LEVEL && this.selectedFeed == Feed.SEAMANTIC) {
+          alert("You Sea-Level is too high for another query. Try inserting knowledge into the feed to lower your sea-level!");
+          return;
+        }
         this.seLevelService.seLevel++;
       } else if (this.seLevelService.seLevel > 0) {
         this.seLevelService.seLevel--;

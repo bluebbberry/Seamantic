@@ -48,6 +48,6 @@
     <div class="mb-3">
       <textarea [(ngModel)]="newMessage" class="form-control" rows="2" placeholder="What's happening?"></textarea>
     </div>
-    <button [disabled]="seLevelService.seLevel > seLevelService.MAXIMUM_SE_LEVEL" (click)="clickedOnSendToMyAccount()" class="btn btn-primary ms-3" style="float: right">Send</button>
+    <button (click)="clickedOnSendToMyAccount()" class="btn btn-primary ms-3" style="float: right">Send</button>
   </div>
 </div>
