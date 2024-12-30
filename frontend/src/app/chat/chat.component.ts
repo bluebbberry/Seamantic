@@ -29,6 +29,8 @@ export class ChatComponent {
   newMessage: string = '';
   protected changed: boolean = false;
   public selectedFeed: Feed = Feed.HOME;
+  protected readonly Feed = Feed;
+  selection: string = "query";
 
   constructor(private http: HttpClient,
               protected microblogService: MicroblogService,
@@ -48,7 +50,13 @@ export class ChatComponent {
   }
 
   clickedOnSendToMyAccount() {
-    this.seLevelService.seLevel++;
+    if (this.selectedFeed == Feed.SEAMANTIC) {
+      if (this.selection == 'query') {
+        this.seLevelService.seLevel++;
+      } else if (this.seLevelService.seLevel > 0) {
+        this.seLevelService.seLevel--;
+      }
+    }
     console.log("Clicked on send");
     if (this.newMessage) {
       this.statusesService.statuses.push(this.newMessage);
@@ -81,8 +89,6 @@ export class ChatComponent {
   clickedOnIcon() {
     this.router.navigate(['/']);
   }
-
-  protected readonly Feed = Feed;
 
   clickedOnEditSidekickSelection() {
     this.router.navigate(['/choose-sidekick']);
