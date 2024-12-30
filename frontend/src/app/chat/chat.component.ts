@@ -60,12 +60,17 @@ export class ChatComponent {
       } else if (this.seLevelService.seLevel > 0) {
         this.seLevelService.seLevel--;
       }
+      this.newMessage += ' #semanticweb';
     }
     console.log("Clicked on send");
     if (this.newMessage) {
       this.statusesService.statuses.push(this.newMessage);
       this.microblogService.sendMessage(this.newMessage, () => {
-        this.microblogService.fetchHomeStatuses();
+        if (this.selectedFeed == Feed.HOME) {
+          this.microblogService.fetchHomeStatuses();
+        } else if (this.selectedFeed == Feed.SEAMANTIC) {
+          this.microblogService.fetchSemanticStatuses();
+        }
       });
       this.newMessage = '';
     } else {
