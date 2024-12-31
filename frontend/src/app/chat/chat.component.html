@@ -45,9 +45,37 @@
       <option value="query">Query</option>
       <option value="insert">Insert Item</option>
     </select>
+
     <div class="mb-3">
-      <textarea [(ngModel)]="newMessage" class="form-control" rows="2" placeholder="What's happening?"></textarea>
+      <!-- Display textarea for query -->
+      <textarea
+        *ngIf="!(selection == 'insert')"
+        [(ngModel)]="newMessage"
+        class="form-control"
+        rows="2"
+        placeholder="What's happening?">
+    </textarea>
+
+      <!-- Display input fields for insert -->
+      <div *ngIf="selection == 'insert' && selectedFeed == Feed.SEAMANTIC">
+        <input
+          [(ngModel)]="insertLabels"
+          class="form-control mb-2"
+          placeholder="Label"
+          type="text" />
+        <input
+          [(ngModel)]="insertDescriptions"
+          class="form-control mb-2"
+          placeholder="Description"
+          type="text" />
+      </div>
     </div>
-    <button (click)="clickedOnSendToMyAccount()" class="btn btn-primary ms-3" style="float: right">Send</button>
+
+    <button
+      (click)="clickedOnSendToMyAccount()"
+      class="btn btn-primary ms-3"
+      style="float: right">
+      Send
+    </button>
   </div>
 </div>
