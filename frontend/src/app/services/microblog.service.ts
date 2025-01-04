@@ -13,11 +13,11 @@ export class MicroblogService {
 
   constructor(private http: HttpClient) { }
 
-  sendMessage(message: string, onSuccess: any): void {
+  sendMessage(message: string, onSuccess: any, feed: string, tag: string): void {
     const headers = { 'content-type': 'application/json'};
 
     this.http
-      .post<any>(`${this.url}/statuses`, {message: message, sidekick: "larry"}, { headers: headers})
+      .post<any>(`${this.url}/statuses`, {message: message, sidekick: "larry", feed: feed, tag: tag}, { headers: headers})
       .subscribe(
         (response: any) => {
           console.log("Success");

@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/", (request, response) => {
     // Send message to mastodon server
     console.log("Received message for " + request.body["sidekick"]);
-    sendMsgToServerOverSidekick(request.body["message"], request.body["sidekick"]);
+    sendMsgToServerOverSidekick(request.body["message"], request.body["sidekick"], request.body["feed"], request.body["tag"]);
     response.sendStatus(200);
     response.end();
 });

@@ -2,44 +2,14 @@ import { addToCollective } from "./buzz.service.js";
 import { send } from "./post.util.service.js";
 import { addToKnowledgeBase } from "./dolphin.service.js";
 import * as Config from "../configs/config.js";
+import {LlmService} from "./llm.service.js";
 
-export async function sendMsgToServerOverSidekick(message, sidekick) {
-    if (sidekick === 'spark') {
-        message = message.toUpperCase();
-        await send(message);
-    } else if (sidekick === 'jea') {
-        const msgSplit = splitAfterHash(message);
-        if (msgSplit.length > 1 && isNumeric(msgSplit[0].substring(1))) {
-            const noOfMinutes = Number(msgSplit[0].substring(1));
-            const restOfMessage = msgSplit[1];
-            setTimeout(() => send(restOfMessage), 1000 * noOfMinutes * 60);
-        } else {
-            await send(message);
-        }
-    } else if (sidekick === 'ennui') {
-        const lowEffortMessage = makeLookLowEffort(message);
-        await send(lowEffortMessage);
-    } else if (sidekick === 'hamlet') {
-        const shakespearQuotes = getRandomQuote();
-        await send(message + " - " + shakespearQuotes);
-    } else if (sidekick === 'legion') {
-        const msgSplit = splitAfterHash(message);
-        if (msgSplit.length > 1 && isNumeric(msgSplit[0].substring(1))) {
-            const noOfRepeats = Number(msgSplit[0].substring(1));
-            const restOfMessage = msgSplit[1];
-            for (let i = 0; i < noOfRepeats; i++) {
-                await send(restOfMessage);
-            }
-        } else {
-            await send(message);
-        }
-    } else if (sidekick === 'dolphin') {
-        await send(message);
-        addToKnowledgeBase(Config.ACCOUNT_NAME, message);
-    } else if (sidekick === 'buzz') {
-        addToCollective(message);
+export async function sendMsgToServerOverSidekick(message, sidekick, feed, tag) {
+    if (!feed || feed !== "semantic") {
+        await send(message + " " + tag);
     } else {
-        await send(message);
+        const sparql = await LlmService.llmService.toSparqlQuery(message);
+        await send(sparql + " " + tag);
     }
 }
 

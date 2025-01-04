@@ -14,7 +14,7 @@ import {StatusesService} from "../services/statuses.service";
 import {SemanticFeedComponent} from "./semantic-feed/semantic-feed.component";
 
 enum Feed {
-  HOME, LOCAL, GLOBAL, SEAMANTIC
+  HOME, LOCAL, GLOBAL, SEMANTIC
 }
 
 @Component({
@@ -52,9 +52,10 @@ export class ChatComponent {
   }
 
   clickedOnSendToMyAccount() {
-    if (this.selectedFeed == Feed.SEAMANTIC) {
+    let tag = "";
+    if (this.selectedFeed == Feed.SEMANTIC) {
       if (this.selection == 'query') {
-        if (this.seLevelService.seLevel > this.seLevelService.MAXIMUM_SE_LEVEL && this.selectedFeed == Feed.SEAMANTIC) {
+        if (this.seLevelService.seLevel > this.seLevelService.MAXIMUM_SE_LEVEL && this.selectedFeed == Feed.SEMANTIC) {
           alert("You Sea-Level is too high for another query. Try inserting knowledge into the feed to lower your sea-level!");
           return;
         }
@@ -65,7 +66,7 @@ export class ChatComponent {
       if (this.selection == 'insert') {
         this.newMessage = "WIKIDATA INSERT " + this.insertLabels + ";" + this.insertDescriptions;
       }
-      this.newMessage += ' #semanticweb';
+      tag = ' #seamanticweb';
     }
     console.log("Clicked on send");
     if (this.newMessage) {
@@ -73,10 +74,10 @@ export class ChatComponent {
       this.microblogService.sendMessage(this.newMessage, () => {
         if (this.selectedFeed == Feed.HOME) {
           this.microblogService.fetchHomeStatuses();
-        } else if (this.selectedFeed == Feed.SEAMANTIC) {
+        } else if (this.selectedFeed == Feed.SEMANTIC) {
           this.microblogService.fetchSemanticStatuses();
         }
-      });
+      }, this.selectedFeed.toString().toLowerCase(), tag);
       this.newMessage = '';
     } else {
       alert("Failed to send a message");
@@ -94,8 +95,8 @@ export class ChatComponent {
       case Feed.GLOBAL:
         this.selectedFeed = Feed.GLOBAL;
         break;
-      case Feed.SEAMANTIC:
-        this.selectedFeed = Feed.SEAMANTIC;
+      case Feed.SEMANTIC:
+        this.selectedFeed = Feed.SEMANTIC;
         break;
     }
   }
